@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script>
+        let max, choice, result;
+        
+        function computerPlay(){
+            getRandomInt(3);
+
+            switch (choice){
+                case 0:
+                    result = 'Rock';
+                    break;
+                case 1:
+                    result = 'Paper';
+                    break;
+                case 2:
+                    result = 'Scissors';
+                    break;
+                default: ;
+            };
+            return result;
+        };
+
+        function getRandomInt(max) {
+            choice = Math.floor(Math.random() * max);
+        };
+    </script>
+</body>
+</html>
