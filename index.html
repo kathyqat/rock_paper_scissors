@@ -6,12 +6,10 @@
 
 <body>
     <script>
-        let max, choice, result;
+        let max, result, winner;
         
         function computerPlay(){
-            getRandomInt(3);
-
-            switch (choice){
+            switch (getRandomInt(3)){
                 case 0:
                     result = 'Rock';
                     break;
@@ -27,8 +25,44 @@
         };
 
         function getRandomInt(max) {
-            choice = Math.floor(Math.random() * max);
+            return Math.floor(Math.random() * max);
         };
+
+        function playRound(playerSelection, computerSelection){
+            playerSelection = playerSelection.toUpperCase();
+            computerSelection = computerSelection.toUpperCase();
+            
+            switch(true){
+                case (playerSelection == computerSelection):
+                    winner = "Tie! Play again"
+                    break;
+                case ((playerSelection == "ROCK") && (computerSelection == "PAPER")):
+                    winner = "You Lose! Paper beats Rock"
+                    break;
+                case ((playerSelection == "ROCK") && (computerSelection == "SCISSORS")):
+                    winner = "You Win! Rock beats Scissors"
+                    break;
+                case ((playerSelection == "PAPER") && (computerSelection == "SCISSORS")):
+                    winner = "You Lose! Scissors beats Paper"
+                    break;
+                case ((playerSelection == "PAPER") && (computerSelection == "ROCK")):
+                    winner = "You Win! Paper beats Rock"
+                    break;
+                case ((playerSelection == "SCISSORS") && (computerSelection == "ROCK")):
+                    winner = "You Lose! Rock beats Scissors"
+                    break;
+                case ((playerSelection == "SCISSORS") && (computerSelection == "PAPER")):
+                    winner = "You Win! Scissors beats Paper"
+                    break;
+                default: ;
+            }
+            return winner;
+        };
+
+        // test code
+        // const playerSelection = 'rock';
+        // const computerSelection = computerPlay;
+        // console.log(playRound(playerSelection, computerSelection()));
     </script>
 </body>
 </html>
