@@ -9,11 +9,11 @@
         <button id="rock" type="button">Rock</button>
         <button id="paper" type="button">Paper</button>
         <button id="scissors" type="button">Scissors</button>
+
+        <div id="result"></div>
     </main>
 
     <script>
-        let winner;
-        
         function computerPlay(){
             switch (getRandomInt()){
                 case 0:
@@ -32,6 +32,8 @@
         function getRandomInt() {
             return Math.floor(Math.random() * 3);
         };
+
+        let winner;
 
         function playRound(playerSelection, computerSelection){
             playerSelection = playerSelection.toUpperCase();
@@ -73,8 +75,11 @@
             button.addEventListener('click', (e) => {
                 let computerSelection = computerPlay; 
                 let playerSelection = e.target.getAttribute('id');
+                let resultDiv = document.querySelector('div');
 
-                console.log(playRound(playerSelection, computerSelection()));
+                // console.log(playRound(playerSelection, computerSelection()));
+                resultDiv.innerHTML += `${playRound(playerSelection, computerSelection())}
+                <br>`;
             });
         });
 
