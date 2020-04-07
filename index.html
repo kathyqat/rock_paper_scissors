@@ -2,6 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8">
+    
+    <style>
+
+    </style>
 </head>
 
 <body>
@@ -10,7 +14,7 @@
         <button id="paper" type="button">Paper</button>
         <button id="scissors" type="button">Scissors</button>
 
-        <div id="result"></div>
+        <div></div>
     </main>
 
     <script>
@@ -61,61 +65,44 @@
                 case ((playerSelection == "SCISSORS") && (computerSelection == "PAPER")):
                     winner = "You Win! Scissors beats Paper"
                     break;
-                case (playerSelection != "ROCK" || playerSelection != "PAPER" || playerSelection != "SCISSORS"):
-                    winner = "Please re-enter your choice";
-                    break;
                 default: ;
             };
             return winner;
         };
 
         let buttons = document.querySelectorAll('button');
+        let playerWins = 0;
+        let playerLosses = 0;
 
         buttons.forEach((button) => {
             button.addEventListener('click', (e) => {
                 let computerSelection = computerPlay; 
                 let playerSelection = e.target.getAttribute('id');
-                let resultDiv = document.querySelector('div');
+                let div = document.querySelector('div');
+                let roundResult = playRound(playerSelection, computerSelection());
 
-                // console.log(playRound(playerSelection, computerSelection()));
-                resultDiv.innerHTML += `${playRound(playerSelection, computerSelection())}
-                <br>`;
+                if (winner.substr(0, 7) == "You Win"){
+                    playerWins++;
+                } else if (winner.substr(0, 8) == "You Lose"){
+                    playerLosses++;
+                };
+
+                div.innerHTML += `${roundResult}
+                    <br>
+                    ${playerWins} - ${playerLosses}
+                    <br>`;
+
+                if (playerWins == 5){
+                    alert("You've won! Congrats!");
+                    playerWins = 0;
+                    playerLosses = 0;
+                } else if (playerLosses == 5) {
+                    alert("GG EZ, computer wins");
+                    playerWins = 0;
+                    playerLosses = 0;
+                };
             });
         });
-
-
-        // let playerWins = 0;
-        // let playerLosses = 0;
-        // let games = 0;
-
-        // function game(){           
-        //     do {
-        //         let playerSelection = window.prompt("Best out of 5! Rock, paper, or scissors?");
-        //         let computerSelection = computerPlay;
-        //         console.log(playRound(playerSelection, computerSelection()));
-
-        //         if (winner.substr(0, 7) == "You Win"){
-        //             playerWins++;
-        //             games++;
-        //         }
-        //         else if (winner.substr(0, 8) == "You Lose"){
-        //             playerLosses++;
-        //             games++;
-        //         }
-        //         else{};
-        //     } while (games < 5 && playerWins < 3 && playerLosses < 3);
-
-        //     if (playerWins >= 3){
-        //         console.log("You've won! Congrats!");
-        //     }
-        //     else {
-        //         console.log("GG EZ, computer wins");
-        //     };
-
-        //     playerWins = 0;
-        //     playerLosses = 0;
-        //     games = 0;
-        // };
     </script>
 </body>
 </html>
